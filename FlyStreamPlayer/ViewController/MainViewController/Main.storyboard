@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MlL-KV-vgW">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="YfD-vp-vpw">
+            <objects>
+                <navigationController storyboardIdentifier="RootNaviViewController" id="MlL-KV-vgW" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bP7-4C-Iw9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="laR-5l-Vyf" kind="relationship" relationship="rootViewController" id="uWs-Q7-8fj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6aC-4P-pHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-730" y="116"/>
+        </scene>
+        <!--MainViewController-->
+        <scene sceneID="iYE-Kh-GaW">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" id="laR-5l-Vyf" userLabel="MainViewController" customClass="MainViewController" customModule="FlyStreamPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3lO-vu-ymE"/>
+                        <viewControllerLayoutGuide type="bottom" id="xJd-OS-djz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZaK-Ry-SHm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="rod-Xq-dXa" userLabel="mainTableView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="rod-Xq-dXa" secondAttribute="trailing" id="29X-GI-4l6"/>
+                            <constraint firstItem="xJd-OS-djz" firstAttribute="top" secondItem="rod-Xq-dXa" secondAttribute="bottom" id="Bar-lV-tPN"/>
+                            <constraint firstItem="rod-Xq-dXa" firstAttribute="leading" secondItem="ZaK-Ry-SHm" secondAttribute="leading" id="mmd-Yg-ra0"/>
+                            <constraint firstItem="rod-Xq-dXa" firstAttribute="top" secondItem="ZaK-Ry-SHm" secondAttribute="top" id="mnd-zh-God"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="cbE-Mn-SRF"/>
+                    <connections>
+                        <outlet property="mainTableView" destination="rod-Xq-dXa" id="2oU-3F-uo7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CiK-Cd-DEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52.5" y="118.30985915492958"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="PDu-Kv-bps">
+            <objects>
+                <navigationController id="dGJ-2y-M7J" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6PL-WN-p9d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Q1p-LK-a60" kind="relationship" relationship="rootViewController" id="K4L-Pu-EhM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L1k-Sy-vqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-954" y="-196"/>
+        </scene>
+        <!--Stream View Controller-->
+        <scene sceneID="y6z-P3-t75">
+            <objects>
+                <viewController storyboardIdentifier="StreamViewController" id="Q1p-LK-a60" customClass="StreamViewController" customModule="FlyStreamPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1LY-yj-E5b"/>
+                        <viewControllerLayoutGuide type="bottom" id="Brc-aT-KMc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7KP-dA-c0k">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8K-d4-UTP" userLabel="viewContainer">
+                                <rect key="frame" x="8" y="110" width="398" height="618"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="rtsp(rtmp):// media URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N1C-Ol-9se" userLabel="urlTextField">
+                                <rect key="frame" x="8" y="72" width="398" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4rj-8f-fTF"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="N1C-Ol-9se" secondAttribute="trailing" constant="8" id="594-Xw-BUs"/>
+                            <constraint firstItem="Brc-aT-KMc" firstAttribute="top" secondItem="r8K-d4-UTP" secondAttribute="bottom" constant="8" id="BGp-1M-tao"/>
+                            <constraint firstItem="N1C-Ol-9se" firstAttribute="leading" secondItem="7KP-dA-c0k" secondAttribute="leading" constant="8" id="Bpq-E9-JtG"/>
+                            <constraint firstAttribute="trailing" secondItem="r8K-d4-UTP" secondAttribute="trailing" constant="8" id="Tbf-jF-Soh"/>
+                            <constraint firstItem="r8K-d4-UTP" firstAttribute="leading" secondItem="7KP-dA-c0k" secondAttribute="leading" constant="8" id="elm-gg-dIR"/>
+                            <constraint firstItem="N1C-Ol-9se" firstAttribute="top" secondItem="1LY-yj-E5b" secondAttribute="bottom" constant="8" id="n4F-Gg-EeS"/>
+                            <constraint firstItem="r8K-d4-UTP" firstAttribute="top" secondItem="N1C-Ol-9se" secondAttribute="bottom" constant="8" id="rgH-Ve-6vW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="MA1-Bq-xfi"/>
+                    <connections>
+                        <outlet property="urlTextField" destination="N1C-Ol-9se" id="ZKl-Im-wuN"/>
+                        <outlet property="viewContainer" destination="r8K-d4-UTP" id="Vxe-ud-pQA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DOy-Gi-Z9X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-188" y="-197.45127436281859"/>
+        </scene>
+    </scenes>
+</document>
