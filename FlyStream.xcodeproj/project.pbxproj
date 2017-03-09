@@ -1380,6 +1380,10 @@
 					"$(PROJECT_DIR)/FlyStream/3rdParty/FFmpeg/lib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
+					"-read_only_relocs",
+					suppress,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jingweiwu.FlyStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1408,6 +1412,10 @@
 					"$(PROJECT_DIR)/FlyStream/3rdParty/FFmpeg/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
+					"-read_only_relocs",
+					suppress,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jingweiwu.FlyStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
