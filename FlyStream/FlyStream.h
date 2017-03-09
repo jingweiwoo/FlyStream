@@ -8,7 +8,7 @@
 
 #import "FLYStreamManager.h"
 #import "FLYStreamView.h"
-// #import "FLYCommon.h"
+#import "FLYCommon.h"
 
 //! Project version number for FlyStream.
 FOUNDATION_EXPORT double FlyStreamVersionNumber;

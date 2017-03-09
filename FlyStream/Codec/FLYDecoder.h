@@ -10,11 +10,11 @@
 
 @interface FLYDecoder : NSObject
 
-@property (nonatomic) BOOL isYUV;
-@property (nonatomic) BOOL hasVideo;
-@property (nonatomic) BOOL hasAudio;
-@property (nonatomic) BOOL hasPicture;
-@property (nonatomic) BOOL isEOF;
+@property (nonatomic, readonly) BOOL isYUV;
+@property (nonatomic, readonly) BOOL hasVideo;
+@property (nonatomic, readonly) BOOL hasAudio;
+@property (nonatomic, readonly) BOOL hasPicture;
+@property (nonatomic, readonly) BOOL isEOF;
 
 @property (nonatomic) double duration;
 @property (nonatomic) NSDictionary *metadata;

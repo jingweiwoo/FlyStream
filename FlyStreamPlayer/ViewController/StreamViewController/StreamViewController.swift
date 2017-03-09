@@ -76,11 +76,11 @@ class StreamViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        streamViewManager.close()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        streamViewManager.close()
         unregisterNotification()
     }
 
@@ -114,7 +114,11 @@ class StreamViewController: BaseViewController {
                        object: nil)
         nc.addObserver(self,
                        selector: #selector(notifyStreamViewManagerEOF),
-                       name: NSNotification.Name.StreamClosed,
+                       name: NSNotification.Name.StreamEOF,
+                       object: nil)
+        nc.addObserver(self,
+                       selector: #selector(notifyStreamViewManagerOpenURLFailed(notification:)),
+                       name: NSNotification.Name.StreamOpenURLFailed,
                        object: nil)
         nc.addObserver(self,
                        selector: #selector(notifyStreamViewManagerBufferStateChanged),
@@ -314,7 +318,8 @@ class StreamViewController: BaseViewController {
     //
     // MARK: - Notifications
     //
-    @objc private func notifyAppDidEnterBackground(notification: Notification) {
+    @objc
+    private func notifyAppDidEnterBackground(notification: Notification) {
         if self.streamViewManager.playing {
             self.pause()
             
@@ -324,30 +329,16 @@ class StreamViewController: BaseViewController {
         }
     }
 
-    @objc private func notifyAppWillEnterForeground(notification: Notification) {
+    @objc
+    private func notifyAppWillEnterForeground(notification: Notification) {
         if restoreStream {
             restoreStream = false
             play()
         }
     }
     
-    @objc private func notifyStreamViewManagerEOF(notification: Notification) {
-        self.status = .EOF
-        if(repeatly) {
-            self.replay()
-        } else {
-            self.close()
-        }
-    }
-    
-    @objc private func notifyStreamViewManagerClosed(notification: Notification) {
-        self.status = .closed
-        waitingIndicator?.stopAnimating()
-        self.destoryTimer()
-        self.doNextOperation(self.nextOperation)
-    }
-    
-    @objc private func notifyStreamViewManagerOpened(notification: Notification) {
+    @objc
+    private func notifyStreamViewManagerOpened(notification: Notification) {
         DispatchQueue.main.async {
             self.waitingIndicator?.stopAnimating()
         }
@@ -384,7 +375,49 @@ class StreamViewController: BaseViewController {
         }
     }
     
-    @objc private func notifyStreamViewManagerBufferStateChanged(notification: Notification) {
+    @objc
+    private func notifyStreamViewManagerClosed(notification: Notification) {
+        self.status = .closed
+        waitingIndicator?.stopAnimating()
+        self.destoryTimer()
+        self.doNextOperation(self.nextOperation)
+    }
+    
+    @objc
+    private func notifyStreamViewManagerEOF(notification: Notification) {
+        self.status = .EOF
+        if(repeatly) {
+            self.replay()
+        } else {
+            self.close()
+        }
+    }
+    
+    @objc
+    private func notifyStreamViewManagerOpenURLFailed(notification: Notification) {
+        DispatchQueue.main.async {
+            self.waitingIndicator?.stopAnimating()
+        }
+        //if !self.streamViewManager.opened {
+            self.status = .none
+            self.doNextOperation(self.nextOperation)
+        //}
+        
+        let err = notification.object as! NSError
+        let errorCode: FLYErrorCode = FLYErrorCode(rawValue: err.code)!
+        
+        switch errorCode {
+        case FLYErrorCode.ErrorCodeInvalidURL:
+            break
+        default:
+            break
+        }
+        
+        return
+    }
+    
+    @objc
+    private func notifyStreamViewManagerBufferStateChanged(notification: Notification) {
         let userInfo = notification.userInfo!
         let state: Bool = userInfo[StreamBufferStateNotificationKey as NSString] as! Bool
         

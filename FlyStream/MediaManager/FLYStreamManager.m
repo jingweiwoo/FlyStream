@@ -18,6 +18,7 @@
 NSString *const StreamOpenedNotification = @"StreamOpenedNotification";
 NSString *const StreamClosedNotification = @"StreamClosedNotification";
 NSString *const StreamEOFNotification = @"StreamEOFNotification";
+NSString *const StreamOpenURLFailedNotification = @"StreamOpenURLFailedNotification";
 NSString *const StreamBufferStateChangedNotification = @"StreamBufferStateChangedNotification";
 
 NSString *const StreamBufferStateNotificationKey = @"StreamBufferStateNotificationKey";
@@ -103,7 +104,7 @@ NSString *const StreamSeekStateNotificationKey = @"StreamSeekStateNotificationKe
     }
 }
 
-- (void)clearVars {
+- (void)clearVariables {
     [_vframes removeAllObjects];
     [_aframes removeAllObjects];
     _playingAudioFrame = nil;
@@ -123,15 +124,15 @@ NSString *const StreamSeekStateNotificationKey = @"StreamSeekStateNotificationKe
         NSError *error = nil;
         _opening = YES;
         if (![_decoder openURL:url error:&error]) {
-            NSLog(@"open: %@, error: %@", url, error);
+            NSLog(@"\nOpen: %@, \nError: %@", url, error);
             _opening = NO;
-            [[NSNotificationCenter defaultCenter] postNotificationName:StreamOpenedNotification object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:StreamOpenURLFailedNotification object:error];
             return;
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            _streamView.isYUV = [_decoder isYUV];
-            _streamView.keepLastFrame = [_decoder hasPicture] && ![_decoder hasVideo];
-            _streamView.contentSize = CGSizeMake([_decoder videoWidth], [_decoder videoHeight]);
+            _streamView.isYUV = _decoder.isYUV;
+            _streamView.keepLastFrame = _decoder.hasPicture && !_decoder.hasVideo;
+            _streamView.contentSize = CGSizeMake(_decoder.videoWidth, _decoder.videoHeight);
             _streamView.contentMode = UIViewContentModeScaleAspectFit;
             
             _duration = _decoder.duration;
@@ -149,7 +150,7 @@ NSString *const StreamSeekStateNotificationKey = @"StreamSeekStateNotificationKe
             };
             
             _opened = YES;
-            [[NSNotificationCenter defaultCenter] postNotificationName:StreamOpenedNotification object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:StreamOpenedNotification object:nil];
         });
     });
 }
@@ -162,7 +163,7 @@ NSString *const StreamSeekStateNotificationKey = @"StreamSeekStateNotificationKe
         if (_opening || _buffering) return;
         [_decoder close];
         [_audioManager close];
-        [self clearVars];
+        [self clearVariables];
         [[NSNotificationCenter defaultCenter] postNotificationName:StreamClosedNotification object:nil];
         dispatch_cancel(timer);
     });
@@ -225,7 +226,7 @@ NSString *const StreamSeekStateNotificationKey = @"StreamSeekStateNotificationKe
     // Check if reach the end and play all frames.
     if (noframes && eof) {
         [self pause];
-        [[NSNotificationCenter defaultCenter] postNotificationName:StreamEOFNotification object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:StreamEOFNotification object:nil];
         return;
     }
     
@@ -237,11 +238,16 @@ NSString *const StreamSeekStateNotificationKey = @"StreamSeekStateNotificationKe
     if (noframes && !_notifiedBufferStart) {
         _notifiedBufferStart = YES;
         NSDictionary *userInfo = @{ StreamBufferStateNotificationKey : @(_notifiedBufferStart) };
-        [[NSNotificationCenter defaultCenter] postNotificationName:StreamBufferStateChangedNotification object:self userInfo:userInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:StreamBufferStateChangedNotification
+                                                            object:self
+                                                          userInfo:userInfo];
+        
     } else if (!noframes && _notifiedBufferStart) {
         _notifiedBufferStart = NO;
         NSDictionary *userInfo = @{ StreamBufferStateNotificationKey : @(_notifiedBufferStart) };
-        [[NSNotificationCenter defaultCenter] postNotificationName:StreamBufferStateChangedNotification object:self userInfo:userInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:StreamBufferStateChangedNotification
+                                                            object:self
+                                                          userInfo:userInfo];
     }
     
     // Render if has picture

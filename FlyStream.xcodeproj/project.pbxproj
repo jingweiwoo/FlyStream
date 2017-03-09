@@ -52,7 +52,7 @@
 		38E562FD1E68020E00C26CA2 /* FlyStreamPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E562FC1E68020E00C26CA2 /* FlyStreamPlayerTests.swift */; };
 		38E563081E68020E00C26CA2 /* FlyStreamPlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E563071E68020E00C26CA2 /* FlyStreamPlayerUITests.swift */; };
 		38E564051E68026700C26CA2 /* FLYDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E563901E68026700C26CA2 /* FLYDecoder.m */; };
-		38E564061E68026700C26CA2 /* FLYCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 38E563921E68026700C26CA2 /* FLYCommon.h */; };
+		38E564061E68026700C26CA2 /* FLYCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 38E563921E68026700C26CA2 /* FLYCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38E564071E68026700C26CA2 /* FLYCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E563931E68026700C26CA2 /* FLYCommon.m */; };
 		38EB52D01E6BBE240048B34F /* FLYStreamManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EB52CE1E6BBE240048B34F /* FLYStreamManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38EB52D11E6BBE240048B34F /* FLYStreamManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EB52CF1E6BBE240048B34F /* FLYStreamManager.m */; };
@@ -1365,6 +1365,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1378,6 +1379,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FlyStream/3rdParty/FFmpeg/lib",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jingweiwu.FlyStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1391,6 +1393,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1404,6 +1407,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FlyStream/3rdParty/FFmpeg/lib",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jingweiwu.FlyStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

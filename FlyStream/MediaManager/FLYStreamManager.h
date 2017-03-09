@@ -12,6 +12,7 @@
 FOUNDATION_EXPORT NSString *const StreamOpenedNotification;
 FOUNDATION_EXPORT NSString *const StreamClosedNotification;
 FOUNDATION_EXPORT NSString *const StreamEOFNotification;
+FOUNDATION_EXPORT NSString *const StreamOpenURLFailedNotification;
 FOUNDATION_EXPORT NSString *const StreamBufferStateChangedNotification;
 
 

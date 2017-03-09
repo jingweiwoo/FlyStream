@@ -30,7 +30,7 @@
     GLfloat _texcoord[8];
 }
 
-@property (nonatomic, readwrite) FLYVideoFrame *lastFrame;
+// @property (nonatomic, readwrite) FLYVideoFrame *lastFrame;
 
 @end
 
@@ -78,8 +78,8 @@
 }
 
 - (void)clear {
-    self.keepLastFrame = NO;
-    self.lastFrame = nil;
+    _keepLastFrame = NO;
+    _lastFrame = nil;
     [self render:nil];
 }
 
@@ -261,11 +261,12 @@
         
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
         
-        // --------------------
+        // --------------------------
+        // Convert frame to image
+        // --------------------------
         GLint x = 0, y = 0, width = _backingWidth, height = _backingHeight;
         GLint dataLength = width * height * 4;
         GLubyte *readData = (GLubyte*)malloc(dataLength * sizeof(GLubyte));
-        
         
         
         // Read pixel data from the framebuffer
@@ -276,7 +277,6 @@
         // Create a CGImage with the pixel data
         // If your OpenGL ES content is opaque, use kCGImageAlphaNoneSkipLast to ignore the alpha channel
         // otherwise, use kCGImageAlphaPremultipliedLast
-        
         CGDataProviderRef ref = CGDataProviderCreateWithData(NULL, readData, dataLength, NULL);
         CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
         CGImageRef iref = CGImageCreate(width,
@@ -320,7 +320,7 @@
     [_context presentRenderbuffer:GL_RENDERBUFFER];
     
     if (_keepLastFrame) {
-        self.lastFrame = frame;
+        _lastFrame = frame;
     }
 }
 

@@ -171,26 +171,28 @@
     }
     
     m_pFormatContext = fmtctx;
+    
     m_nVideoStream = vstream;
     m_pVideoFrame = vframe;
     m_pVideoSwsFrame = vswsframe;
+    m_nPictureStream = picstream;
     m_pVideoCodecContext = vcodectx;
     m_pVideoSwsContext = swsctx;
-    m_nPictureStream = picstream;
+    
     m_nAudioStream = astream;
     m_pAudioFrame = aframe;
     m_pAudioCodecContext = acodectx;
     m_pAudioSwrContext = aswrctx;
     
-    self.isYUV = isYUV;
-    self.hasVideo = vstream >= 0;
-    self.hasAudio = astream >= 0;
-    self.hasPicture = picstream >= 0;
-    self.isEOF = NO;
+    _isYUV = isYUV;
+    _hasVideo = vstream >= 0;
+    _hasAudio = astream >= 0;
+    _hasPicture = picstream >= 0;
+    _isEOF = NO;
     
     int64_t duration = fmtctx->duration;
-    self.duration = (duration == AV_NOPTS_VALUE ? -1 : ((double)duration / AV_TIME_BASE));
-    self.metadata = [self findMetadata:fmtctx];
+    _duration = (duration == AV_NOPTS_VALUE ? -1 : ((double)duration / AV_TIME_BASE));
+    _metadata = [self findMetadata:fmtctx];
     
     return YES;
 }
@@ -303,11 +305,11 @@
     [self closePictureStream];
     if (m_pFormatContext != NULL) avformat_close_input(&m_pFormatContext);
     avformat_network_deinit();
-    self.isYUV = NO;
-    self.hasVideo = NO;
-    self.hasAudio = NO;
-    self.hasPicture = NO;
-    self.isEOF = NO;
+    _isYUV = NO;
+    _hasVideo = NO;
+    _hasAudio = NO;
+    _hasPicture = NO;
+    _isEOF = NO;
 }
 
 - (void)closeVideoStream {
@@ -361,7 +363,7 @@
     while (reading) {
         int ret = av_read_frame(fmtctx, &packet);
         if (ret < 0) {
-            if (ret == AVERROR_EOF) self.isEOF = YES;
+            if (ret == AVERROR_EOF) _isEOF = YES;
             char *e = av_err2str(ret);
             NSLog(@"read frame error: %s", e);
             break;

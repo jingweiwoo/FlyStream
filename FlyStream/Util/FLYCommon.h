@@ -38,7 +38,6 @@ typedef NS_ENUM (NSInteger, FLYErrorCode) {
 };
 
 
-
 #endif /* FLYCommon_h */
 
 
