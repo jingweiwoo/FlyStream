@@ -34,8 +34,13 @@ typedef void (^onPauseComplete)();
 @property (nonatomic, readonly) BOOL opened;
 @property (nonatomic, readonly) BOOL playing;
 @property (nonatomic, readonly) BOOL buffering;
+@property (nonatomic, readonly) BOOL isRealTimeVideo;
 
 @property (nonatomic, readonly) NSDictionary *metadata;
+
+- (instancetype)init __attribute__((unavailable("init not available, call initWithRealTimeVideo:(BOOL)realTimeVideo instead.")));
+
+- (instancetype)initWithRealTimeVideo:(BOOL)realTimeVideo;
 
 - (void)openURL:(NSString *)url;
 - (void)close;

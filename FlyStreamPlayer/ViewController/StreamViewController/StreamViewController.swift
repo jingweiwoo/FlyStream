@@ -37,7 +37,7 @@ class StreamViewController: BaseViewController {
     weak var waitingIndicator: UIActivityIndicatorView?
     
     lazy var streamViewManager: FLYStreamManager = {
-        return FLYStreamManager()
+        return FLYStreamManager(realTimeVideo: true)
     }()
     
     var timer: DispatchSourceTimer?
@@ -56,7 +56,9 @@ class StreamViewController: BaseViewController {
         super.viewDidLoad()
         initComponent()
         
-        url = "rtmp://203.207.99.19:1935/live/CCTV1"//"rtsp://streaming3.webcam.nl:1935/n233/n233.stream"
+        url = "rtsp://192.168.1.1/MJPG?W=640&H=480&Q=30&BR=5000000"
+            
+            //"rtmp://203.207.99.19:1935/live/CCTV1" "rtsp://streaming3.webcam.nl:1935/n233/n233.stream"
         
         urlTextField.delegate = self
         urlTextField.text = url
@@ -423,7 +425,13 @@ class StreamViewController: BaseViewController {
         
         if state {
             self.status = .buffering
-            waitingIndicator?.startAnimating()
+            // waitingIndicator?.startAnimating()
+            // Don't want the indicator to be displayed
+            if streamViewManager.isRealTimeVideo {
+                waitingIndicator?.stopAnimating()
+            } else {
+               waitingIndicator?.startAnimating()
+            }
         } else {
             self.status = .playing
             waitingIndicator?.stopAnimating()

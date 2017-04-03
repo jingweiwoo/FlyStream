@@ -52,12 +52,17 @@ NSString *const StreamSeekStateNotificationKey = @"StreamSeekStateNotificationKe
 
 @implementation FLYStreamManager
 
-- (id)init {
+- (instancetype)initWithRealTimeVideo:(BOOL)realTimeVideo {
     self = [super init];
     if (self) {
+        _isRealTimeVideo = realTimeVideo;
         [self initAll];
     }
     return self;
+}
+
+- (void)dealloc {
+    NSLog(@"FLYStreamManager dealloc");
 }
 
 - (void)initAll {
@@ -260,7 +265,7 @@ NSString *const StreamSeekStateNotificationKey = @"StreamSeekStateNotificationKe
     
     // Check whether render is neccessary
     if (_vframes.count <= 0 || !_decoder.hasVideo) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, _isRealTimeVideo ? (int64_t)0 : (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self render];
         });
         return;
@@ -279,7 +284,7 @@ NSString *const StreamSeekStateNotificationKey = @"StreamSeekStateNotificationKe
     // Sync audio with video
     double syncTime = [self syncTime];
     NSTimeInterval t = MAX(frame.duration + syncTime, 0.01);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(t * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_isRealTimeVideo ? 0.01 : t) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self render];
     });
 }
