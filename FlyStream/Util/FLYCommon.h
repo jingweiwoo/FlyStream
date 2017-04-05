@@ -35,6 +35,17 @@ typedef NS_ENUM (NSInteger, FLYErrorCode) {
     ErrorCodeNoAudioChannel = -6,
     ErrorCodeNoAudioSampleRate = -7,
     ErrorCodeNoAudioVolume = -8,
+    ErrorCodeCannotSetAudioCategory = -9,
+    ErrorCodeCannotSetAudioActive = -10,
+    ErrorCodeCannotInitAudioUnit = -11,
+    ErrorCodeCannotCreateAudioComponent = -12,
+    ErrorCodeCannotGetAudioStreamDescription = -13,
+    ErrorCodeCannotSetAudioRenderCallback = -14,
+    ErrorCodeCannotUninitAudioUnit = -15,
+    ErrorCodeCannotDisposeAudioUnit = -16,
+    ErrorCodeCannotDeactivateAudio = -17,
+    ErrorCodeCannotStartAudioUnit = -18,
+    ErrorCodeCannotStopAudioUnit = -19,
 };
 
 

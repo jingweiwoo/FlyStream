@@ -14,11 +14,14 @@ FOUNDATION_EXPORT NSString *const StreamClosedNotification;
 FOUNDATION_EXPORT NSString *const StreamEOFNotification;
 FOUNDATION_EXPORT NSString *const StreamOpenURLFailedNotification;
 FOUNDATION_EXPORT NSString *const StreamBufferStateChangedNotification;
+FOUNDATION_EXPORT NSString *const StreamErrorNotification;
 
 
 #pragma mark - Notification Key
 FOUNDATION_EXPORT NSString *const StreamBufferStateNotificationKey;
 FOUNDATION_EXPORT NSString *const StreamSeekStateNotificationKey;
+FOUNDATION_EXPORT NSString *const StreamErrorNotificationKey;
+FOUNDATION_EXPORT NSString *const StreamRawErrorNotificationKey;
 
 #pragma mark - Class interface  - FLYStreamManager
 typedef void (^onPauseComplete)();

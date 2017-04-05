@@ -54,7 +54,7 @@
 }
 
 - (BOOL)openURL:(NSString *)url error:(NSError **)error {
-    if (url == nil) {
+    if (url == nil || url.length == 0) {
         [FLYUtil createError:error
                   withDomain:FLYErrorDomainDecoder
                      andCode:ErrorCodeInvalidURL
@@ -82,7 +82,6 @@
 #endif
     
     // 3. Analyze Stream Info
-    // reduce the analyze time
     ret = avformat_find_stream_info(fmtctx, NULL);
     if (ret < 0) {
         avformat_close_input(&fmtctx);

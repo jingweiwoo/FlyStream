@@ -16,9 +16,13 @@ typedef void(^FLYAudioManagerFrameReaderBlock)(float *data, UInt32 num, UInt32 c
 @property (nonatomic) float volume;
 
 - (BOOL)open:(NSError **)error;
-- (void)play;
-- (void)pause;
-- (void)close;
+
+- (BOOL)play;
+- (BOOL)play:(NSError **)error;
+- (BOOL)pause;
+- (BOOL)pause:(NSError **)error;
+- (BOOL)close;
+- (BOOL)close:(NSArray<NSError *> **)errors;
 
 - (double)sampleRate;
 - (UInt32)channels;
