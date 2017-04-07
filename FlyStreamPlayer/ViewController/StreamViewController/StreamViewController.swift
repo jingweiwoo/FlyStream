@@ -56,7 +56,7 @@ class StreamViewController: BaseViewController {
         super.viewDidLoad()
         initComponent()
         
-        url = "rtsp://192.168.1.1/MJPG?W=640&H=480&Q=30&BR=5000000"
+        url = "rtsp://192.168.1.1/MJPG?W=720&H=400&Q=30&BR=5000000"
             
             //"rtmp://203.207.99.19:1935/live/CCTV1" "rtsp://streaming3.webcam.nl:1935/n233/n233.stream"
         
@@ -149,6 +149,7 @@ class StreamViewController: BaseViewController {
     }
     
     private func initStreamManager() {
+        self.streamViewManager.streamView.delegate = self
         let streamView: UIView = self.streamViewManager.streamView
         
         //
@@ -428,7 +429,8 @@ class StreamViewController: BaseViewController {
             // waitingIndicator?.startAnimating()
             // Don't want the indicator to be displayed
             if streamViewManager.isRealTimeVideo {
-                waitingIndicator?.stopAnimating()
+                //waitingIndicator?.stopAnimating()
+                waitingIndicator?.startAnimating()
             } else {
                waitingIndicator?.startAnimating()
             }
@@ -497,6 +499,12 @@ extension StreamViewController: UITextFieldDelegate {
         if urlTextField.canResignFirstResponder {
             urlTextField.resignFirstResponder()
         }
+    }
+}
+
+extension StreamViewController: FLYStreamViewDelegate {
+    func streamView(_ view: UIView!, receivedLastFrameIn image: UIImage!) {
+        let img = image
     }
 }
 

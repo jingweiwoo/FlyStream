@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FLYStreamViewDelegate.h"
 
 @class FLYVideoFrame;
 @interface FLYStreamView : UIView
@@ -15,6 +16,7 @@
 @property (nonatomic) BOOL isYUV;
 @property (nonatomic) BOOL keepLastFrame;
 
+@property (weak) id<FLYStreamViewDelegate> delegate;
 @property (nonatomic, readonly) FLYVideoFrame *lastFrame;
 @property (nonatomic, readonly) UIImage *lastFrameImage;
 

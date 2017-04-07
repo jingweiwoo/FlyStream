@@ -36,6 +36,7 @@
 		38B2A97B1E68602500F6402F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B2A9741E68602500F6402F /* CoreMedia.framework */; };
 		38B2A97C1E68602500F6402F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B2A9751E68602500F6402F /* QuartzCore.framework */; };
 		38B2A97D1E68602500F6402F /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B2A9761E68602500F6402F /* VideoToolbox.framework */; };
+		38C361091E97898200FBA7A3 /* FLYStreamViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C361061E9784B900FBA7A3 /* FLYStreamViewDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38D9088D1E6C14E60010562C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D9088A1E6C14E60010562C /* BaseViewController.swift */; };
 		38D9088E1E6C14E60010562C /* StreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D9088C1E6C14E60010562C /* StreamViewController.swift */; };
 		38D908901E6C15460010562C /* Stream.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38D9088F1E6C15460010562C /* Stream.storyboard */; };
@@ -247,6 +248,7 @@
 		38B2A9741E68602500F6402F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		38B2A9751E68602500F6402F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		38B2A9761E68602500F6402F /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		38C361061E9784B900FBA7A3 /* FLYStreamViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYStreamViewDelegate.h; sourceTree = "<group>"; };
 		38D9088A1E6C14E60010562C /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		38D9088C1E6C14E60010562C /* StreamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamViewController.swift; sourceTree = "<group>"; };
 		38D9088F1E6C15460010562C /* Stream.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Stream.storyboard; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 		3820C5121E6A8EFF0019FD76 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				38C361051E97848800FBA7A3 /* Protocol */,
 				3820C5131E6A8F370019FD76 /* FLYStreamView.h */,
 				3820C5141E6A8F370019FD76 /* FLYStreamView.m */,
 			);
@@ -501,6 +504,14 @@
 				388A40BE1E68176D00F7A889 /* OpenGLES.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		38C361051E97848800FBA7A3 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				38C361061E9784B900FBA7A3 /* FLYStreamViewDelegate.h */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		38D908881E6C14E60010562C /* ViewController */ = {
@@ -928,6 +939,7 @@
 				38F1AFD91E6FA5B2000D0AB2 /* qsv.h in Headers */,
 				38F1B0261E6FA5B3000D0AB2 /* replaygain.h in Headers */,
 				38F1AFFD1E6FA5B2000D0AB2 /* cpu.h in Headers */,
+				38C361091E97898200FBA7A3 /* FLYStreamViewDelegate.h in Headers */,
 				38F1AFF91E6FA5B2000D0AB2 /* camellia.h in Headers */,
 				38F1B0251E6FA5B3000D0AB2 /* rc4.h in Headers */,
 				38F1AFED1E6FA5B2000D0AB2 /* aes_ctr.h in Headers */,

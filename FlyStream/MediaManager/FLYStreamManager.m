@@ -59,6 +59,18 @@ NSString *const StreamRawErrorNotificationKey = @"StreamRawErrorNotificationKey"
 
 @implementation FLYStreamManager
 
++ (instancetype) sharedInstance {
+    static FLYStreamManager *sharedFLYStreamManagerInstance;
+    
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken,^(void) {
+        sharedFLYStreamManagerInstance = [[self alloc] initWithRealTimeVideo:YES];
+    });
+    
+    return sharedFLYStreamManagerInstance;
+}
+
 - (instancetype)initWithRealTimeVideo:(BOOL)realTimeVideo {
     self = [super init];
     if (self) {
@@ -323,7 +335,7 @@ NSString *const StreamRawErrorNotificationKey = @"StreamRawErrorNotificationKey"
     
     // Check whether render is neccessary
     if (_vframes.count <= 0 || !_decoder.hasVideo) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, _isRealTimeVideo ? (int64_t)0 : (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_isRealTimeVideo ? 0.01 : 0.1) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self render];
         });
         return;
@@ -352,7 +364,10 @@ NSString *const StreamRawErrorNotificationKey = @"StreamRawErrorNotificationKey"
     // Sync audio with video
     double syncTime = [self syncTime];
     NSTimeInterval t = MAX(frame.duration + syncTime, 0.01);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_isRealTimeVideo ? 0.01 : t) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+#if DEBUG
+    NSLog(@"/nt = %f", (double)t);
+#endif
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_isRealTimeVideo ? 0.012 : t) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self render];
     });
 }

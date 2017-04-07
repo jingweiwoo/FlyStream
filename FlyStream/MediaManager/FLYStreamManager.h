@@ -5,7 +5,6 @@
 //  Created by Jingwei Wu on 05/03/2017.
 //  Copyright © 2017 jingweiwu. All rights reserved.
 //
-
 #import <UIKit/UIKit.h>
 
 #pragma mark - Notification
@@ -27,6 +26,7 @@ FOUNDATION_EXPORT NSString *const StreamRawErrorNotificationKey;
 typedef void (^onPauseComplete)();
 
 @class FLYStreamView;
+
 @interface FLYStreamManager : NSObject
 
 @property (readonly) FLYStreamView *streamView;
@@ -40,6 +40,8 @@ typedef void (^onPauseComplete)();
 @property (nonatomic, readonly) BOOL isRealTimeVideo;
 
 @property (nonatomic, readonly) NSDictionary *metadata;
+
++ (instancetype) sharedInstance;
 
 - (instancetype)init __attribute__((unavailable("init not available, call initWithRealTimeVideo:(BOOL)realTimeVideo instead.")));
 
