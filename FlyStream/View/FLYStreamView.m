@@ -308,8 +308,6 @@
         
         // Retrieve the UIImage from the current context
         _lastFrameImage = UIGraphicsGetImageFromCurrentImageContext();
-        [_delegate streamView:self receivedLastFrameInImage:_lastFrameImage.copy];
-        
         UIGraphicsEndImageContext();
         
         // Clean up
@@ -317,6 +315,8 @@
         CFRelease(ref);
         CFRelease(colorspace);
         CGImageRelease(iref);
+        
+        [_delegate streamView:self receivedLastFrameInImage:_lastFrameImage.copy];
         
 #if DEBUG
         NSLog(@"Image captured on: %@", [[[NSDate alloc] initWithTimeIntervalSinceNow:0] description]);
